@@ -1,5 +1,5 @@
-title:            Site Title
-description:      Describe your website here.
+title:            Graphics Programming
+description:      Another graphics programming blog
 disqus_shortname: hpstrtheme
 reading_time:     true
 words_per_minute: 200
@@ -9,14 +9,14 @@ url:
 
 # Owner/author information
 owner:
-  name:           Your Name
+  name:           Alperen Gezer
   avatar:         avatar.jpg
-  bio:            "Your bio goes here. It shouldn't be super long but a good two sentences or two should suffice."
-  email:          you@email.com
+  bio:            "Graphics programmer currently studying at college."
+  email:          alperen.gezer@stu.bahcesehir.edu.tr
   # Social networking links used in footer. Update and remove as you like.
-  twitter:        
+  twitter:        arkenthera
   facebook:       
-  github:         
+  github:         arkenthera
   stackexchange:  
   linkedin:       
   instagram:      

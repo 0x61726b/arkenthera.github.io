@@ -1,29 +1,29 @@
-title:            Site Title
-description:      Describe your website here.
+title:            Cross-platform Graphics Programming simplified
+description:      Building a stateless cross platform renderer and writing about it.I'll occasionally write tutorials or my thoughts on things.
 disqus_shortname: hpstrtheme
 reading_time:     true
 words_per_minute: 200
+
 # Your site's domain goes here (eg: //mmistakes.github.io, http://mademistakes.com, etc)
 # When testing locally leave blank or use http://localhost:4000
 url:
 
 # Owner/author information
 owner:
-  name:           Your Name
+  name:           Alperen Gezer
   avatar:         avatar.jpg
-  bio:            "Your bio goes here. It shouldn't be super long but a good two sentences or two should suffice."
-  email:          you@email.com
+  bio:            "Currently at last year for my Software Enginnering Bachelor's Degree.I like graphics programming and game development in general.Also a gamer and love manga/anime."
+  email:          arkenthera@gmail.com
   # Social networking links used in footer. Update and remove as you like.
-  twitter:        
+  twitter:        arkenthera
   facebook:       
-  github:         
+  github:         arkenthera
   stackexchange:  
   linkedin:       
   instagram:      
   flickr:         
   tumblr:         
   # google plus id, include the '+', eg +mmistakes
-  google_plus:    +yourid
 
 # Background image to be tiled on all pages
 background: 
@@ -37,7 +37,7 @@ bing_verify:
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    America/New_York
 future:      true
-highlighter: pygments
+highlighter: rouge
 markdown:    kramdown
 gems:
   - jekyll-sitemap
@@ -67,3 +67,4 @@ kramdown:
 
 include: [".htaccess"]
 exclude: ["lib", "config.rb", "Capfile", "config", "Gemfile", "Gemfile.lock", "README.md", "LICENSE", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]
+baseurl: /

@@ -1,9 +1,6 @@
 title:            Cross-platform Graphics Programming simplified
 description:      Building a stateless cross platform renderer and writing about it.I'll occasionally write tutorials or my thoughts on things.
 
-title:            Graphics Programming
-description:      Another graphics programming blog
-
 disqus_shortname: hpstrtheme
 reading_time:     true
 words_per_minute: 200

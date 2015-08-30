@@ -23,7 +23,7 @@ It's like KyoAni has a relationship with viewers.Most of the time it was a rolle
 <figure>
 	<img src="/images/oregairu.png"></img>
 </figure>
-The second season of the show.Might need to rewatch..I can't possibly explain this anime in a 1-2 sentence.Probably the best romance/comady combo.
+The second season of the show.Might need to rewatch..I can't possibly explain this anime in a 1-2 sentence.Probably the best romance/comedy combo.
 
 ## Shokugeki no Souma
 

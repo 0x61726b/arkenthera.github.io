@@ -75,6 +75,7 @@ GEM
     rouge (1.9.1)
     safe_yaml (1.0.4)
     sass (3.4.13)
+    stringex (2.5.2)
     timers (4.0.1)
       hitimes
     titlecase (0.1.1)
@@ -94,6 +95,7 @@ DEPENDENCIES
   octopress (~> 3.0.0.rc.12)
   rouge
   sass
+  stringex
   wdm
 
 BUNDLED WITH

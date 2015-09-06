@@ -4,19 +4,28 @@ title: "New Power/Death metal bands"
 modified: 2015-09-06 08:06:03 -0700
 tags: [music]
 image:
-  feature: powermetal.jpg
+  feature: powermetalcover.jpg
 comments: 
 share: 
 ---
 
 ## Ionic Bond
-<iframe width="420" height="315" src="http://www.youtube.com/watch?v=YvAOk-M_MiM" frameborder="0" allowfullscreen="allowfullscreen"> </iframe>
+
+{% youtube YvAOk-M_MiM %}
 
 ## Gladenfold
 
-<iframe width="420" height="315" src="http://www.youtube.com/watch?v=ibBaQpAdFvw" frameborder="0" allowfullscreen="allowfullscreen"> </iframe>
+{% youtube ibBaQpAdFvw %}
 
 ## Dream of Unreality
 
-<iframe width="420" height="315" src="https://www.youtube.com/watch?v=LbCqSiT_0iI" frameborder="0" allowfullscreen="allowfullscreen"> </iframe>
+{% youtube LbCqSiT_0iI %}
+
+## Gyze
+
+{% youtube xQmLLpbMo7U %}
+
+## Sympuls-E
+
+{% youtube w0nX6GFc22Y %}
 

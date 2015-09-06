@@ -11,23 +11,23 @@ share:
 
 ## Ionic Bond
 
-{% youtube YvAOk-M_MiM %}
+<iframe width="560" height="420" src="http://www.youtube.com/embed/YvAOk-M_MiM?color=white&amp;theme=light"></iframe>
 
 ## Gladenfold
 
-{% youtube ibBaQpAdFvw %}
+<iframe width="560" height="420" src="http://www.youtube.com/embed/ibBaQpAdFvw?color=white&amp;theme=light"></iframe>
 
 ## Dream of Unreality
 
-{% youtube LbCqSiT_0iI %}
+<iframe width="560" height="420" src="http://www.youtube.com/embed/LbCqSiT_0iI?color=white&amp;theme=light"></iframe>
 
 ## Gyze
 
-{% youtube xQmLLpbMo7U %}
+<iframe width="560" height="420" src="http://www.youtube.com/embed/xQmLLpbMo7U?color=white&amp;theme=light"></iframe>
 
 ## Sympuls-E
 
-{% youtube w0nX6GFc22Y %}
+<iframe width="560" height="420" src="http://www.youtube.com/embed/w0nX6GFc22Y?color=white&amp;theme=light"></iframe>
 
 I will edit this post later to include the other bands I found this summer.
 

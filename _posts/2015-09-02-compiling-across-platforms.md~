@@ -79,8 +79,9 @@ CMAKE_DEPENDENT_OPTION(YUME_BUILD_OPENGL "Build OpenGL" ON "OPENGL_FOUND" OFF)
 If we are using CMake GUI we can easily specify dependent options. **WIN32;DirectX_D3D11_FOUND** if we're on Windows and Dx11 is found,it will ask for whether to build it or not.
 If we're on Linux,CMake will not even bother looking for Direct3D libraries,so that's nice.
 
+Finally,after fiddling around with dependencies in Ubuntu,I was able to compile the project and execute the sample.Output windows are below!
 
-
+**On Linux**
 <img src="http://i.imgur.com/tkk4yx5.png"/>
-
+**On Win32**
 <img src = "http://i.imgur.com/UAkDhNA.png" />

@@ -2,14 +2,16 @@
 layout: post
 title: "How to detect an external appliction launch on Windows with Qt 5"
 modified: 2015-10-15 00:00:00 -0700
-tags: [Qt,Qt5,Shellhook,nativeEventFilter,Windows,Shell,ShellHookWindow,Hook,HSHELL_WINDOWCREATED,media detection]
+tags: [Qt,Qt5,Shellhook,nativeEventFilter,Windows,Shell,ShellHookWindow,Hook,HSHELL_WINDOWCREATED,media detection,RegisterShellHookWindow]
 image:
   feature: cplusplus.jpg
 comments: 
 share: 
 ---
 
-In a project of mine,I required to detect certain application launch events on my app. It turned out,on Windows this is pretty easy.This tutorial assumes you already know basic stuff,
+## Simple Media Player Launch detection
+
+In a project of mine,I required to detect certain application launch(media players,MPC for example) events on my app. It turned out,on Windows this is pretty easy.This tutorial assumes you already know basic stuff,
 so if you end up here through Google this will be a nice guide.
 
 ## Step 1

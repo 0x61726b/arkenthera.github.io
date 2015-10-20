@@ -15,10 +15,11 @@ is what allowed me to implement screen sharing on my CEF client.
 
 #### Requirements
 [Chromium Repository](https://bitbucket.org/chromiumembedded/cef/wiki/Home)
+
 [CEF Patch](https://github.com/buglloc/cef-builds/blob/master/patches/allow_screen_sharing.patch)
 
 Screen sharing is already possible through getUserMedia but it got removed and moved to chrome extension API for some reason.
-The difference file changes the *browser_host_impl.cc* file which gets processed when we call getUserMedia.
+The difference file changes the **cef/libcef/browser/browser_host_impl.cc** file which gets processed when we call getUserMedia.
 
 #### Applying the patch
 
@@ -32,8 +33,8 @@ Go to *chromium\src\cef\patch\patch.cfg* and add
 
 {% endhighlight %}
 
-Copy the [patch](https://github.com/buglloc/cef-builds/blob/master/patches/allow_screen_sharing.patch) file
-*patches* folder. Note that you need to change
+Copy the [patch](https://github.com/buglloc/cef-builds/blob/master/patches/allow_screen_sharing.patch) file to the
+**patches** folder. Note that you need to change
 {% highlight ruby pygments %}
 
 diff --git a/libcef/browser/browser_host_impl.cc b/libcef/browser/browser_host_impl.cc
@@ -54,8 +55,16 @@ All done,you need to compile the cefclient.Go to chromium source directory and r
 
 {% highlight ruby pygments %}
 
-ninja -C out/Debug
+ninja -C out/Debug cefclient
 
 {% endhighlight %}
+
+Compiling should take 3-7 minutes depending on your system.After compiling is complete,CD to tools directory and run 
+**make_distrib.bat.** This will create a binary distribution which we will use in our CEF client.Note that this will create both *Debug* and *Release* builds for libcef.dll. If you only compiled one version before it might request to recompile in the other configuration,I didnt try so I'm not sure.After the distribution is generated,go to binary_distrib folder,pick your configuration(Debug/Release) then copy the folder into your CEF client.cefsimple isnt required.We should be ready now for the screen sharing allowed libcef.dll.
+
+
+#### Adding the javascript function for screen/window IDs.
+
+To be continued..
 
 

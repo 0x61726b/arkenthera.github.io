@@ -109,140 +109,142 @@ The steps will be taken here are:
 I have a class that enumerates windows and screens then returns CefV8 array.Another class for generating previews.I tried to make it as much as 
 platform independent but still there needs to be some changes to implement the same on Linux.
 {% highlight ruby pygments %}
-	class ScreenShareUtil
-	{
-	public:
-		ScreenShareUtil();
-		static ScreenShareUtil* Get();
-		
-		bool EnumScreens(CefListValue* list);
-		bool EnumWindows(CefListValue* list);
+class ScreenShareUtil
+{
+public:
+	ScreenShareUtil();
+	static ScreenShareUtil* Get();
+	
+	bool EnumScreens(CefListValue* list);
+	bool EnumWindows(CefListValue* list);
 
-		bool GetMediaPreview(std::string type, int64 id, std::vector<unsigned char>* outStream);
-		
-		void CefListValueToV8Array(CefRefPtr<CefListValue> source,CefRefPtr<CefV8Value> target);
+	bool GetMediaPreview(std::string type, int64 id, std::vector<unsigned char>* outStream);
+	
+	void CefListValueToV8Array(CefRefPtr<CefListValue> source,CefRefPtr<CefV8Value> target);
 
 
-	protected:
-		Win32WindowEnumerator* m_pEnumerator;
-	};
+protected:
+	Win32WindowEnumerator* m_pEnumerator;
+};
 {% endhighlight %}
 
-This class only class the **Win32WindowEnumerator** so I'm not including its source.It just returns a CefListValue.
+This class only calls the **Win32WindowEnumerator** so I'm not including its source.It just returns a CefListValue.
 {% highlight ruby pygments %}
-	class Win32WindowEnumerator : public WindowEnumerationInterface
-	{
-	public:
-		bool EnumerateWindows(WindowList* list);
-		bool EnumerateScreens(ScreenList* list);
+class Win32WindowEnumerator : public WindowEnumerationInterface
+{
+public:
+	bool EnumerateWindows(WindowList* list);
+	bool EnumerateScreens(ScreenList* list);
 
-		bool GetWindowPreview(int64 id, std::vector<unsigned char>*);
-		bool GetScreenPreview(int64 id, std::vector<unsigned char>*);
+	bool GetWindowPreview(int64 id, std::vector<unsigned char>*);
+	bool GetScreenPreview(int64 id, std::vector<unsigned char>*);
 
 
 
-	private:
-		//Helper functions
-		char* BitmapToByteArray(HBITMAP, int& len);
-	};
-	{% endhighlight %}
+private:
+	//Helper functions
+	char* BitmapToByteArray(HBITMAP, int& len);
+};
+{% endhighlight %}
+
 All methods are virtual on the interface so in the future if I decide to implement the code for linux they will be ready.WindowList and ScreenList are just
 structures that hold screenId or windowId and title.To generate a "snapshot" of the window/screen we use Win32 API then convert the bitmap to a char array.
 
 {% highlight ruby pygments %}
 //Adaptation of how chromium generates window information
-	BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam)
-	{
-		Win32WindowEnumerator::WindowEnumerationInterface::WindowList* list =
-			reinterpret_cast<Win32WindowEnumerator::WindowEnumerationInterface::WindowList*>(lParam);
+BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam)
+{
+	Win32WindowEnumerator::WindowEnumerationInterface::WindowList* list =
+		reinterpret_cast<Win32WindowEnumerator::WindowEnumerationInterface::WindowList*>(lParam);
 
-		// Skip windows that are invisible, minimized, have no title, or are owned,
-		// unless they have the app window style set.
-		int len = GetWindowTextLength(hwnd);
-		HWND owner = GetWindow(hwnd, GW_OWNER);
-		LONG exstyle = GetWindowLong(hwnd, GWL_EXSTYLE);
-		if (len == 0 || IsIconic(hwnd) || !IsWindowVisible(hwnd) ||
-			(owner && !(exstyle & WS_EX_APPWINDOW))) {
-			return TRUE;
-		}
-
-		// Skip the Program Manager window and the Start button.
-		const size_t kClassLength = 256;
-		WCHAR class_name[kClassLength];
-		const int class_name_length = GetClassName(hwnd, class_name, kClassLength);
-
-		if (wcscmp(class_name, L"Progman") == 0 || wcscmp(class_name, L"Button") == 0)
-			return TRUE;
-
-		if (wcscmp(class_name, L"ApplicationFrameWindow") == 0 ||
-			wcscmp(class_name, L"Windows.UI.Core.CoreWindow") == 0) {
-			return TRUE;
-		}
-		OmniWindow window;
-		const size_t kTitleLength = 500;
-		char window_title[kTitleLength];
-		// Truncate the title if it's longer than kTitleLength.
-		GetWindowTextA(hwnd, window_title, kTitleLength);
-		window.Id = (intptr_t)hwnd;
-		window.Hwnd = hwnd;
-
-		window.Title = (window_title);
-
-		if (window.Title.empty())
-			return TRUE;
-
-
-		list->push_back(window);
-
+	// Skip windows that are invisible, minimized, have no title, or are owned,
+	// unless they have the app window style set.
+	int len = GetWindowTextLength(hwnd);
+	HWND owner = GetWindow(hwnd, GW_OWNER);
+	LONG exstyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+	if (len == 0 || IsIconic(hwnd) || !IsWindowVisible(hwnd) ||
+		(owner && !(exstyle & WS_EX_APPWINDOW))) {
 		return TRUE;
 	}
-	//----------------------------------------------------------------------------
-	bool Win32WindowEnumerator::EnumerateWindows(WindowList* list)
-	{
-		WindowList wl;
-		LPARAM param = reinterpret_cast<LPARAM>(&wl);
-		if (!EnumWindows(EnumWindowsProc, param))
-		{
-			return false;
-		}
-		list->swap(wl);
-		return true;
+
+	// Skip the Program Manager window and the Start button.
+	const size_t kClassLength = 256;
+	WCHAR class_name[kClassLength];
+	const int class_name_length = GetClassName(hwnd, class_name, kClassLength);
+
+	if (wcscmp(class_name, L"Progman") == 0 || wcscmp(class_name, L"Button") == 0)
+		return TRUE;
+
+	if (wcscmp(class_name, L"ApplicationFrameWindow") == 0 ||
+		wcscmp(class_name, L"Windows.UI.Core.CoreWindow") == 0) {
+		return TRUE;
 	}
-	//----------------------------------------------------------------------------
+	OmniWindow window;
+	const size_t kTitleLength = 500;
+	char window_title[kTitleLength];
+	// Truncate the title if it's longer than kTitleLength.
+	GetWindowTextA(hwnd, window_title, kTitleLength);
+	window.Id = (intptr_t)hwnd;
+	window.Hwnd = hwnd;
+
+	window.Title = (window_title);
+
+	if (window.Title.empty())
+		return TRUE;
+
+
+	list->push_back(window);
+
+	return TRUE;
+}
+//----------------------------------------------------------------------------
+bool Win32WindowEnumerator::EnumerateWindows(WindowList* list)
+{
+	WindowList wl;
+	LPARAM param = reinterpret_cast<LPARAM>(&wl);
+	if (!EnumWindows(EnumWindowsProc, param))
+	{
+		return false;
+	}
+	list->swap(wl);
+	return true;
+}
+//----------------------------------------------------------------------------
 {% endhighlight %}
 
 The only important part here is **window.Id = (intptr_t)hwnd;** since **MediaStreamDevice** will want a compatible window ID,which is,on Windows,
-HWND cast to intptr_t.After you generate the ID you can give it to the chromeMediaSourceId and window will be captured properly.
+**HWND** cast to **intptr_t**.After you generate the ID you can give it to the chromeMediaSourceId and window will be captured properly.
 
 {% highlight ruby pygments %}
-	//----------------------------------------------------------------------------
-	bool Win32WindowEnumerator::EnumerateScreens(ScreenList* list)
-	{
-		BOOL enum_result = TRUE;
-		for (int device_index = 0;; ++device_index) {
-			DISPLAY_DEVICE device;
+//----------------------------------------------------------------------------
+bool Win32WindowEnumerator::EnumerateScreens(ScreenList* list)
+{
+	BOOL enum_result = TRUE;
+	for (int device_index = 0;; ++device_index) {
+		DISPLAY_DEVICE device;
 
-			device.cb = sizeof(device);
-			enum_result = EnumDisplayDevices(NULL, device_index, &device, 0);
+		device.cb = sizeof(device);
+		enum_result = EnumDisplayDevices(NULL, device_index, &device, 0);
 
 
-			// |enum_result| is 0 if we have enumerated all devices.
-			if (!enum_result)
-				break;
+		// |enum_result| is 0 if we have enumerated all devices.
+		if (!enum_result)
+			break;
 
-			// We only care about active displays.
-			if (!(device.StateFlags & DISPLAY_DEVICE_ACTIVE))
-				continue;
+		// We only care about active displays.
+		if (!(device.StateFlags & DISPLAY_DEVICE_ACTIVE))
+			continue;
 
-			OmniScreen screen;
-			screen.Id = device_index;
-			list->push_back(screen);
-			LOG(INFO) << screen.Id;
-		}
-		return true;
+		OmniScreen screen;
+		screen.Id = device_index;
+		list->push_back(screen);
+		LOG(INFO) << screen.Id;
 	}
-	//----------------------------------------------------------------------------
+	return true;
+}
+//----------------------------------------------------------------------------
 {% endhighlight %}
+
 Again this is adapted from chromium source. If you have a single monitor there will be only entry which is "0". If you have a secondary monitor
 its device index will be "1" and so forth.
 
@@ -250,63 +252,63 @@ After we generate the lists we just pass it as V8 Array.
 
 {% highlight ruby pygments %}
 bool ScreenShareUtil::EnumScreens(CefListValue* list)
+{
+	Win32WindowEnumerator* wi = new Win32WindowEnumerator;
+	WindowEnumerationInterface::ScreenList wl;
+	wi->EnumerateScreens(&wl);
+
+	WindowEnumerationInterface::ScreenList::iterator It = wl.begin();
+
+	for (It; It != wl.end(); It++)
 	{
-		Win32WindowEnumerator* wi = new Win32WindowEnumerator;
-		WindowEnumerationInterface::ScreenList wl;
-		wi->EnumerateScreens(&wl);
+		std::string id = "screen";
+		id.append(":");
+		id.append(std::to_string(It->Id));
 
-		WindowEnumerationInterface::ScreenList::iterator It = wl.begin();
+		CefRefPtr<CefListValue> media = CefListValue::Create();
+		media->SetString(0, id);
 
-		for (It; It != wl.end(); It++)
-		{
-			std::string id = "screen";
-			id.append(":");
-			id.append(std::to_string(It->Id));
+		if (It->Id == 0)
+			media->SetString(1, "Primary Monitor");
+		else
+			media->SetString(1, "Non-primary Monitor");
 
-			CefRefPtr<CefListValue> media = CefListValue::Create();
-			media->SetString(0, id);
-
-			if (It->Id == 0)
-				media->SetString(1, "Primary Monitor");
-			else
-				media->SetString(1, "Non-primary Monitor");
-
-			list->SetList(list->GetSize(), media);
-		}
-		return true;
+		list->SetList(list->GetSize(), media);
 	}
+	return true;
+}
 {% endhighlight %}
 
 Windows as well..
 
 {% highlight ruby pygments %}
 //----------------------------------------------------------------------------
-	bool ScreenShareUtil::EnumWindows(CefListValue* list)
+bool ScreenShareUtil::EnumWindows(CefListValue* list)
+{
+	Win32WindowEnumerator* wi = new Win32WindowEnumerator;
+	WindowEnumerationInterface::WindowList wl;
+	wi->EnumerateWindows(&wl);
+
+	WindowEnumerationInterface::WindowList::iterator It = wl.begin();
+
+	for (It; It != wl.end(); It++)
 	{
-		Win32WindowEnumerator* wi = new Win32WindowEnumerator;
-		WindowEnumerationInterface::WindowList wl;
-		wi->EnumerateWindows(&wl);
+		LOG(INFO) << It->Id << " " << It->Title.c_str();
 
-		WindowEnumerationInterface::WindowList::iterator It = wl.begin();
+		std::string id = "window";
+		id.append(":");
+		id.append(std::to_string(It->Id));
 
-		for (It; It != wl.end(); It++)
-		{
-			LOG(INFO) << It->Id << " " << It->Title.c_str();
-
-			std::string id = "window";
-			id.append(":");
-			id.append(std::to_string(It->Id));
-
-			CefRefPtr<CefListValue> media = CefListValue::Create();
-			media->SetString(0, id);
-			media->SetString(1, It->Title);
-			list->SetList(list->GetSize(), media);
-		}
-
-
-		return true;
+		CefRefPtr<CefListValue> media = CefListValue::Create();
+		media->SetString(0, id);
+		media->SetString(1, It->Title);
+		list->SetList(list->GetSize(), media);
 	}
-	//----------------------------------------------------------------------------
+
+
+	return true;
+}
+//----------------------------------------------------------------------------
 {% endhighlight %}
 The list values will be converted into V8 Arrays on the V8 handler later.
 

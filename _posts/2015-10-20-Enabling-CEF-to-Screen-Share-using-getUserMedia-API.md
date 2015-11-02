@@ -97,9 +97,7 @@ The steps will be taken here are:
 
 **-Generate window/screen IDs using Win32 API**
 
-**-Create a CefListValue then return a CefV8Array**
-
-**-Call a custom javascript method and return window/screen information to the javascript using a custom V8Handler.**
+**-Create a CefListValue then return a CefV8Array through V8Handler**
 
 **-Implement a custom CEF resource provider to send previews of windows/screens to the UI side.**
 
@@ -314,8 +312,95 @@ The list values will be converted into V8 Arrays on the V8 handler later.
 
 This is it for generating window/screen IDs.Now onto the previews.
 
-
 ## Step 2
+This step is up to you since its only about how to return V8 data.
+
+{% highlight ruby pygments %}
+
+virtual bool Execute(const CefString& name,
+				CefRefPtr<CefV8Value> object,
+				const CefV8ValueList& arguments,
+				CefRefPtr<CefV8Value>& retVal,
+				CefString& exception)
+			{	
+			.....
+			//Generate screen/window IDs....
+			{
+						Arken::ScreenShareUtil* ssu = Arken::ScreenShareUtil::Get();
+						
+						if (arguments.size() != 2)
+						{
+							retVal = CefV8Value::CreateBool(false);
+							LOG(ERROR) << "Invalid call to the eListScreenSharingMedia";
+							return false;
+						}
+						else
+						{
+							CefRefPtr<CefV8Value> callbackSuccess = arguments[0];
+							CefRefPtr<CefV8Value> callbackFailure = arguments[1];
+
+							CefRefPtr<CefListValue> MediaList = CefListValue::Create();
+
+							bool listScreens = true;
+							bool listWindows = true;
+
+							if (listScreens)
+							{
+								ssu->EnumScreens(MediaList);
+							}
+							if (listWindows)
+							{
+								ssu->EnumWindows(MediaList);
+							}
+							CefRefPtr<CefV8Value> v8List = CefV8Value::CreateArray(static_cast<int>(MediaList->GetSize()));
+							ssu->CefListValueToV8Array(MediaList, v8List);
+
+							if (static_cast<int>(MediaList->GetSize()) > 0)
+							{
+								args.push_back(v8List);
+
+								if (callbackSuccess->ExecuteFunctionWithContext(CefV8Context::GetCurrentContext(), object, args))
+								{
+									LOG(INFO) << it->first + ": ExecuteFunctionWithContext Succeed for Success_Callback";
+								}
+								else
+								{
+									HandleException(callbackSuccess, it->first);
+								}
+							}
+							else
+							{
+								retVal = CefV8Value::CreateBool(false);
+								bRet = false;
+								errorString = it->first + ": Media List empty!This should not happen!";
+								args.push_back(CefV8Value::CreateString(errorString));
+
+								if (callbackFailure->ExecuteFunctionWithContext(CefV8Context::GetCurrentContext(), object, args))
+								{
+									LOG(INFO) << it->first + ": ExecuteFunctionWithContext Succeed for Failure_Callback";
+								}
+								else
+								{
+									HandleException(callbackSuccess, it->first);
+								}
+							}
+
+
+							break;
+						}
+					}
+
+			}
+
+{% endhighlight %}
+
+
+Here is how the data looks on the console.
+
+<img src="/images/devtools.png"/>
+
+
+## Step 3
 
 There is lots of Windows code involved.Basically what we do here is take a screenshot,convert to char* array,give it to the CefResourceHandler.
 Note that we will implement a custom resource handler called DesktopMediaResourceProvider.on ClientHandler::OnBeforeResourceLoad,
@@ -468,7 +553,12 @@ bool Win32WindowEnumerator::GetScreenPreview(int64 id, std::vector<unsigned char
 	}
 {% endhighlight %}
 
+And window Preview..
+
 {% highlight ruby pygments %}
+	//----------------------------------------------------------------------------
+	bool Win32WindowEnumerator::GetWindowPreview(int64 id, std::vector<unsigned char>* out)
+	{
 		//Cast back to HWND
 		intptr_t i = (intptr_t)id;
 		HWND hwnd = (HWND)i;
@@ -511,92 +601,50 @@ bool Win32WindowEnumerator::GetScreenPreview(int64 id, std::vector<unsigned char
 
 		*out = chVector;
 		return true;
+	}
+	//----------------------------------------------------------------------------
 
 {% endhighlight %}
 
 Now everything is set on the C++ side
 
-## Step 3
-This step is up to you since its only about how to return V8 data.
+## Final Step
+
+Now you have previews,window/screen data,only we need to parse the media list coming from V8Handler and use it accordingly.
+Here is my poor javascript implementation.
 
 {% highlight ruby pygments %}
 
-virtual bool Execute(const CefString& name,
-				CefRefPtr<CefV8Value> object,
-				const CefV8ValueList& arguments,
-				CefRefPtr<CefV8Value>& retVal,
-				CefString& exception)
-			{	
-			.....
-			//Generate screen/window IDs....
-			{
-						Arken::ScreenShareUtil* ssu = Arken::ScreenShareUtil::Get();
-						
-						if (arguments.size() != 2)
-						{
-							retVal = CefV8Value::CreateBool(false);
-							LOG(ERROR) << "Invalid call to the eListScreenSharingMedia";
-							return false;
-						}
-						else
-						{
-							CefRefPtr<CefV8Value> callbackSuccess = arguments[0];
-							CefRefPtr<CefV8Value> callbackFailure = arguments[1];
+for (i = 0; i < mediaList.length; i++) {
 
-							CefRefPtr<CefListValue> MediaList = CefListValue::Create();
+        var imgUrl = "http://desktop_app/internals/desktop-media/" + mediaList[i][0].replace(':', '-') + ".bmp";
+        var element = container.cloneNode(true);
+        element.style.display = "block";
+        element.id = "previewItem" + i;
+        if (lastElement != undefined) {
+            element.getElementsByClassName("previewImage")[0].setAttribute("src", imgUrl);
+            element.getElementsByClassName("previewTitle")[0].innerHTML = mediaList[i][1].substr(0, 45) + "...";
+            element.getElementsByClassName("chromeId")[0].innerHTML = mediaList[i][0];
+            lastElement.appendChild(element);
+        } else {
 
-							bool listScreens = true;
-							bool listWindows = true;
+            element.getElementsByClassName("previewImage")[0].setAttribute("src", imgUrl);
+            element.getElementsByClassName("previewTitle")[0].innerHTML = mediaList[i][1];
+            element.getElementsByClassName("chromeId")[0].innerHTML = mediaList[i][0];
+            document.getElementById("previewItem").appendChild(element);
 
-							if (listScreens)
-							{
-								ssu->EnumScreens(MediaList);
-							}
-							if (listWindows)
-							{
-								ssu->EnumWindows(MediaList);
-							}
-							CefRefPtr<CefV8Value> v8List = CefV8Value::CreateArray(static_cast<int>(MediaList->GetSize()));
-							ssu->CefListValueToV8Array(MediaList, v8List);
+        }
 
-							if (static_cast<int>(MediaList->GetSize()) > 0)
-							{
-								args.push_back(v8List);
+        lastElement = element;
 
-								if (callbackSuccess->ExecuteFunctionWithContext(CefV8Context::GetCurrentContext(), object, args))
-								{
-									LOG(INFO) << it->first + ": ExecuteFunctionWithContext Succeed for Success_Callback";
-								}
-								else
-								{
-									HandleException(callbackSuccess, it->first);
-								}
-							}
-							else
-							{
-								retVal = CefV8Value::CreateBool(false);
-								bRet = false;
-								errorString = it->first + ": Media List empty!This should not happen!";
-								args.push_back(CefV8Value::CreateString(errorString));
-
-								if (callbackFailure->ExecuteFunctionWithContext(CefV8Context::GetCurrentContext(), object, args))
-								{
-									LOG(INFO) << it->first + ": ExecuteFunctionWithContext Succeed for Failure_Callback";
-								}
-								else
-								{
-									HandleException(callbackSuccess, it->first);
-								}
-							}
-
-
-							break;
-						}
-					}
-
-			}
+    }
 
 {% endhighlight %}
 
-## Step 2
+I tried my best explaining how things work but really you need to figure out some things yourself as the post is already too long.
+Here is the final look!
 
+<img src="/images/final.png"/>
+
+
+Thanks again for [buglloc](https://github.com/buglloc) for his CEF patch.

@@ -4,7 +4,7 @@ title: "Nagi no Asukara"
 modified: 2015-11-23 00:01:26 +0200
 tags: [anime,nagi no asukara]
 image:
-  feature: nga2.jpg
+  feature: https://camo.githubusercontent.com/c2c72af200ec9a3eb42f72e8d4bf290b79c889bf/687474703a2f2f692e696d6775722e636f6d2f384850787361652e706e67
   credit: 
   creditlink: 
 comments: 

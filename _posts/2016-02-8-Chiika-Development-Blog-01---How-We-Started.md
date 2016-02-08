@@ -1,3 +1,15 @@
+---
+layout: post
+title: "Nagi no Asukara"
+modified: 2015-11-23 00:01:26 +0200
+tags: [anime,nagi no asukara]
+image:
+  feature: nga2.jpg
+  credit: 
+  creditlink: 
+comments: 
+share: 
+---
 Hey everyone,we have decided that we would be writing our development experience of Chiika since blogging could play a great role in creating an open source software.In this post I'm going to go over the thought process of creating *Chiika*.
 
 ##Chiika ?

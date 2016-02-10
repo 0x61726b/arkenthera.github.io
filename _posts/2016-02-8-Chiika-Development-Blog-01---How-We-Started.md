@@ -50,5 +50,3 @@ Here are some drafts we have done with Qt/Qml
 ![](http://i.imgur.com/Pegrsdt.png)
 
 ![](http://i.imgur.com/8HPxsae.png)
-
-That's it for now.In the next post, I will talk about what we want with Chiika and more technical stuff.

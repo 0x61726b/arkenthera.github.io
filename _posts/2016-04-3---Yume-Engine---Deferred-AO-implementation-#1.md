@@ -4,14 +4,12 @@ title: "Yume Engine - Deferred AO Implementation #1"
 modified: 2015-11-23 00:01:26 +0200
 tags: [chiika,programming]
 image:
-  feature:
+  feature: http://i.imgur.com/AvTgmjS.jpg
   credit: 
   creditlink: 
 comments: 
 share: 
 ---
-
-![](http://i.imgur.com/AvTgmjS.jpg)
 
 ![](http://i.imgur.com/1sa6nNJ.png)
 

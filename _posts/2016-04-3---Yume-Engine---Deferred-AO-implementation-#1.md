@@ -11,6 +11,11 @@ comments:
 share: 
 ---
 
+![](http://i.imgur.com/AvTgmjS.jpg)
+
+![](http://i.imgur.com/1sa6nNJ.png)
+
+
 I've finally implemented an AO algorithm on my renderer.I'll post some screenshots and the HLSL shader code.This algorithm is called Scaleable Ambient Obscurance(SAO) presented [here](http://graphics.cs.williams.edu/papers/SAOHPG12/McGuire12SAO.pdf).
 
 
@@ -24,7 +29,7 @@ Without blur pass
 ![](http://i.imgur.com/W3pxhFT.png)
 
 
-If not rendering deferred,view space position is reconstructed from depth but with normal buffer from GBuffer pass we can sample the normals from normal texture.
+The occlusion fades away with the distance from camera to discard pixels far away so we dont calculate occlusion at infinite depth such as Skybox.
 
 Here is how to reconstruct depth from position or from normal gbuffer texture
 
@@ -62,6 +67,15 @@ More screens,
 ![](http://i.imgur.com/ihqDO3F.jpg)
 
 
+Now with [depth aware](http://rastergrid.com/blog/2010/09/efficient-gaussian-blur-with-linear-sampling) gaussian blur
+
+![](http://i.imgur.com/ERjYsO1.png)
+
+![](http://i.imgur.com/bpPA8k8.png)
+
+
+
+Here is the pixel shader HLSL code.
 
 ```
 void PS(float2 iTexCoord : TEXCOORD0,
@@ -112,7 +126,7 @@ void PS(float2 iTexCoord : TEXCOORD0,
  }
  float occlusion = max(0.0, 1.0 - sum * intensity * (5.0 / NUM_SAMPLES));
  //occlusion = (clamp(1.0 - (1.0 - occlusion) * 5, 0.0, 1.0) + 0.1f) / (1.0 + 0.1f);
- oColor = float4(occlusion, occlusion,occlusion, 1.0);
+ oColor = float4(occlusion, SmallEncodeDepth(depthC), 1.0);
  #endif
 
  #ifdef COMBINE

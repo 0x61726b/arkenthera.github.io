@@ -2,7 +2,7 @@
 layout: post
 title: "Yume Engine - Deferred AO Implementation #1"
 modified: 2015-11-23 00:01:26 +0200
-tags: [chiika,programming]
+tags: [yume,programming]
 image:
   feature: Playground_2016-04-03_17-02-17.jpg
   credit: 

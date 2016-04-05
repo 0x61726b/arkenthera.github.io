@@ -2,7 +2,7 @@
 layout: post
 title: "Yume Engine - Light Shafts"
 modified: 2015-11-23 00:01:26 +0200
-tags: [yume,programming]
+tags: [yume,programming,direct3d11,light shafts,light beams,godrays,god rays,c++,graphics programming]
 image:
   feature: blogshaft.jpg
   credit:
@@ -28,12 +28,10 @@ There is a way to achieve light shafts/god rays/light beams without too much of 
 
  Values used are:
 
+
  **Weight** : 0.08
-
  **Decay**  : 0.95
-
  **Exposure** : 0.4
-
  **Samples** : 100
 
 
@@ -45,11 +43,8 @@ There is a way to achieve light shafts/god rays/light beams without too much of 
 
 
   **Weight** : 0.12
-
   **Decay**  : 0.95
-
   **Exposure** : 0.9
-
   **Samples** : 100
 
 
@@ -57,12 +52,10 @@ There is a way to achieve light shafts/god rays/light beams without too much of 
 
  ![](http://i.imgur.com/yJkcqsl.jpg)
 
+
  **Weight** : 0.22
-
  **Decay**  : 0.90
-
  **Exposure** : 0.25
-
  **Samples** : 100
 
 
@@ -95,7 +88,7 @@ There is a way to achieve light shafts/god rays/light beams without too much of 
  Now to the HLSL code!
 
 
- ```
+```
 
  void PS(float2 iTexCoord : TEXCOORD0,
          float2 iScreenPos : TEXCOORD1,
@@ -127,6 +120,6 @@ There is a way to achieve light shafts/god rays/light beams without too much of 
  }
 
 
- ```
+```
 
  I hope this is helpful to someone.

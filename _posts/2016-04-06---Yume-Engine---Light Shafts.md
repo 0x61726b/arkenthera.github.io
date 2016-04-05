@@ -29,15 +29,46 @@ There is a way to achieve light shafts/god rays/light beams without too much of 
  Values used are:
 
  **Weight** : 0.08
+
  **Decay**  : 0.95
+
  **Exposure** : 0.4
+
  **Samples** : 100
+
 
  ![](http://i.imgur.com/jhi44QL.jpg)
 
  ![](http://i.imgur.com/61mRXuH.jpg)
 
  ![](http://i.imgur.com/ZmloQwz.png)
+
+
+  **Weight** : 0.12
+
+  **Decay**  : 0.95
+
+  **Exposure** : 0.9
+
+  **Samples** : 100
+
+
+ ![](http://i.imgur.com/Bu77geL.jpg)
+
+ ![](http://i.imgur.com/yJkcqsl.jpg)
+
+ **Weight** : 0.22
+
+ **Decay**  : 0.90
+
+ **Exposure** : 0.25
+
+ **Samples** : 100
+
+
+![](http://i.imgur.com/MaGCLZW.jpg)
+
+
 
  Here are what passes look like on VS Debugger
 
@@ -65,6 +96,7 @@ There is a way to achieve light shafts/god rays/light beams without too much of 
 
 
  ```
+
  void PS(float2 iTexCoord : TEXCOORD0,
          float2 iScreenPos : TEXCOORD1,
      out float4 oColor : OUTCOLOR0)
@@ -93,6 +125,7 @@ There is a way to achieve light shafts/god rays/light beams without too much of 
     oColor = float4(original + shaft, 1.0);
  #endif
  }
+
 
  ```
 

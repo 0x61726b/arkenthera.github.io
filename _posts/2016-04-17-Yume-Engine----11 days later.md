@@ -4,7 +4,7 @@ title: "Yume Engine - 11 Days Later"
 modified: 2015-11-23 00:01:26 +0200
 tags: [yume,programming,direct3d11,cornell,c++,graphics programming]
 image:
-  feature: cornell2.png
+  feature: cornell3.png
   credit:
   creditlink:
 comments:

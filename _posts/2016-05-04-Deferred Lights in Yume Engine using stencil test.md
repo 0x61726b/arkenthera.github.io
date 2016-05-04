@@ -4,7 +4,7 @@ title: "Yume Engine - Deferred Lights using tesellated spheres and stencil test"
 modified: 2016-05-04 00:01:26 +0200
 tags: [yume,programming,direct3d11,stencil,point lights,lights,deferred lights,light volumes,c++,graphics programming]
 image:
-  feature: cornell3.png
+  feature: pointlightfeature.jpg
   credit:
   creditlink:
 comments:
@@ -12,7 +12,7 @@ share:
 ---
 
 In this post,I am going to talk about how I implemented lights in the deferred pipeline of Yume and provide source code as much as possible.I also used a Micro-facet BRDF algorithm to give the point lights nice specular reflectance.
-In a deferred pipeline,we must create a pass for each light to calculate per-pixel light in a volume encapsulated by a tesellated sphere.
+In a deferred pipeline,we must create a pass for each light to calculate the direct lighting in that pixel.If its a point/spot light we will render a tesellated sphere and use depth-stencil test to find out which pixels will be lit.If its a directional light we will render a full screen triangle.
 The first pass is the ordinary gbuffer pass where we output the diffuse and specular albedo as well as normals and linear depth.
 In the second pass,
 
@@ -35,10 +35,13 @@ for each light
 Talking about point lights,in the vertex shader we have to transform the volume to accomodate for the lights position in the world.
 
 In the CPU side, we upload a transform matrix such as,
+
 ```
+
 float range = light->GetRange();
 XMMATRIX volumeTransform = light->GetPosition();
 volumeTransform = DirectX::XMMatrixMultiply(DirectX::XMMatrixScaling(range,range,range),volumeTransform);
+
 ```
 
 then in the vertex shader,

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>arkenthera.com</title>
+    <link>http://arkenthera.github.io/</link>
+    <description>Recent content on arkenthera.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 07 May 2016 20:44:02 +0300</lastBuildDate>
+    <atom:link href="http://arkenthera.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Voxel Cone Tracing</title>
+      <link>http://arkenthera.github.io/post/Voxel-Cone-Tracing/</link>
+      <pubDate>Sat, 07 May 2016 20:44:02 +0300</pubDate>
+      
+      <guid>http://arkenthera.github.io/post/Voxel-Cone-Tracing/</guid>
+      <description>&lt;p&gt;VCT is a way to apply indirect lighting to a scene to approximate Global Illumination. GI helps increase the realism of a given scene.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Brief introduction to Yume Engine and Screenshots</title>
+      <link>http://arkenthera.github.io/project/yume/</link>
+      <pubDate>Sat, 07 May 2016 16:12:31 +0300</pubDate>
+      
+      <guid>http://arkenthera.github.io/project/yume/</guid>
+      <description>
+
+&lt;p&gt;&lt;strong&gt;Yume Engine&lt;/strong&gt; is my playground for graphics experiments and developing my skills in graphics programming.
+It took me a lot to finally come up with an idea which allows me to build a high level renderer that is simple but effective.&lt;img src=&#34;../../images/2.png#img-yume1&#34; alt=&#34;alt&#34; /&gt;
+I wanted to have 2 things at first.One being able to create fast prototypes while other is being simple to read/comprehend.
+Yume Engine is not a real game engine.I dont have to think about masses using this to create games so
+ I used hacks here and there to get things going quickly,when it wouldnt be plaisuble in a real engine situation.
+ In this article I&amp;rsquo;m going to talk about how Yume engine handles state changes,how it executes draw calls and hopefully
+ provide source code at the end of the post so you,reader, maybe get a hold of how this engine works.&lt;/p&gt;
+
+&lt;p&gt;For a long time I didnt know how I can create a high level renderer,or to put it better,
+I didnt know where to start.After several hundreds of hours inspecting,studying other engines
+ I now have how I could go for building a renderer that is not so complicated and does what I want.
+ Along the way I have learnt a lot,be it my coding proficiency or my graphics knowledge.
+ To people out there who dont know where to start,it is a very good idea to examine open source engines like
+ Ogre3D,Horde3D,Urho3D and many more! You can find many similarities in Yume by looking at those engines. &lt;br /&gt;
+ Although Yume doesn&amp;rsquo;t have many features, there are several which I&amp;rsquo;m really happy to have. Such as Global Illumination!&lt;/p&gt;
+
+&lt;h1 id=&#34;deferred-rendering:c86278bf4caeee7dc73687eaa5462b5c&#34;&gt;Deferred Rendering&lt;/h1&gt;
+
+&lt;p&gt;Yume Engine uses full deferred pipeline.For most of the samples,the GBuffer has 4 render targets, &lt;strong&gt;Diffuse Albedo&lt;/strong&gt;,&lt;strong&gt;Specular Albedo&lt;/strong&gt;,&lt;strong&gt;Linear Depth&lt;/strong&gt; and &lt;strong&gt;Normals&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../images/gbuffer.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We then use these render targets in the next stages of rendering,such as Deferred Lights.For the moment, I didnt use hardware depth buffer because I also store the linear depth as&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;float2 linearDepth = float2(z, z*z);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to use in &lt;em&gt;Variance Shadow Mapping&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;There is also &lt;strong&gt;Reflective Shadow Map&lt;/strong&gt; support, which is basically rendering to the GBuffer but from the lights perspective.&lt;/p&gt;
+
+&lt;h1 id=&#34;deferred-lights:c86278bf4caeee7dc73687eaa5462b5c&#34;&gt;Deferred Lights&lt;/h1&gt;
+
+&lt;p&gt;Since Yume is fully deferred,there has to be a way to implement lights.In a deferred pipeline,we must create a pass for each light,be it directional,
+point or spot light.&lt;/p&gt;
+
+&lt;p&gt;For each point light,we draw a tesellated sphere,move it to lights world position and scale it to point lights range.
+We then enable stencil test using the stencil buffer from the GBuffer pass. Comparing against stencil buffer yields the pixels that will be in the point lights range of influnce.
+Then we shade the pixels by &lt;em&gt;reconstructing the depth&lt;/em&gt; in the pixel shader using the Linear Depth from the GBuffer pass.&lt;/p&gt;
+
+&lt;h2 id=&#34;results:c86278bf4caeee7dc73687eaa5462b5c&#34;&gt;Results&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../images/plight1.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../images/plight2.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../images/plight3.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;horizon-based-ambient-occlusion:c86278bf4caeee7dc73687eaa5462b5c&#34;&gt;Horizon Based Ambient Occlusion&lt;/h1&gt;
+
+&lt;p&gt;Adapting from the sample in NVidia SDK&amp;rsquo;s DirectX 9 HBAO implementation, Yume Engine supports HBAO. Ambient Occlusion is not a simple concept to explain but in easiest words,for pixels in depth buffer,we assume a hemisphere,then shoot rays at random directions to see if they occlude something.If they do we add a occlusion factor.Note that this is the very basic idea of Ambient Occlusion and there are several implementations such as Scaleable Ambient Obscurance,ABAO,SSAO,SSDO,AAO.. For more information see &lt;a href=&#34;http://http.developer.nvidia.com/GPUGems3/gpugems3_ch12.html&#34;&gt;GPU GEMS 3&lt;/a&gt;
+Here is a gif of the effect when HBAO is off,max,med and normal qualities.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://i.imgur.com/w3S2uNA.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here is a side by side comparison&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;../../images/hbaosidebyside.png&#34; alt=&#34;alt&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

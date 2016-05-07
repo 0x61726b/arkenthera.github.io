@@ -1,4 +1,4 @@
-baseurl = "http://arkenthera.github.io/arkenthera.com/"
+baseurl = "http://arkenthera.github.io/"
 languageCode = "en-us"
 title = "arkenthera.com"
 [params.links]

@@ -53,6 +53,8 @@
         <p>|</p>
         <a href="#" id="link-resume">Resume</a>
         <p>|</p>
+        <a href="http://arkenthera.github.io/blog/" id="link-resume">Blog</a>
+        <p>|</p>
         <a href="#" id="link-about">About</a>
       </nav>
     </header>
@@ -104,7 +106,7 @@ I didnt know where to start.After several hundreds of hours inspecting,studying 
 
 <p>Yume Engine uses full deferred pipeline.For most of the samples,the GBuffer has 4 render targets, <strong>Diffuse Albedo</strong>,<strong>Specular Albedo</strong>,<strong>Linear Depth</strong> and <strong>Normals</strong>.</p>
 
-<p><img src="../../images/gbuffer.jpg" alt="" /></p>
+<p><img src="../../images/gbuffer.png" alt="" /></p>
 
 <p>We then use these render targets in the next stages of rendering,such as Deferred Lights.For the moment, I didnt use hardware depth buffer because I also store the linear depth as</p>
 
@@ -137,58 +139,11 @@ Then we shade the pixels by <em>reconstructing the depth</em> in the pixel shade
 <p>Adapting from the sample in NVidia SDK&rsquo;s DirectX 9 HBAO implementation, Yume Engine supports HBAO. Ambient Occlusion is not a simple concept to explain but in easiest words,for pixels in depth buffer,we assume a hemisphere,then shoot rays at random directions to see if they occlude something.If they do we add a occlusion factor.Note that this is the very basic idea of Ambient Occlusion and there are several implementations such as Scaleable Ambient Obscurance,ABAO,SSAO,SSDO,AAO.. For more information see <a href="http://http.developer.nvidia.com/GPUGems3/gpugems3_ch12.html">GPU GEMS 3</a>
 Here is a gif of the effect when HBAO is off,max,med and normal qualities.</p>
 
-<h2 id="results-1:c86278bf4caeee7dc73687eaa5462b5c">Results</h2>
-
 <p><img src="http://i.imgur.com/w3S2uNA.gif" alt="" /></p>
 
 <p>Here is a side by side comparison</p>
 
 <p><img src="../../images/hbaosidebyside.png" alt="alt" /></p>
-
-<h1 id="light-propagation-volumes:c86278bf4caeee7dc73687eaa5462b5c">Light Propagation Volumes</h1>
-
-<p>LPVs are small volumetric textures which are injected with VPLs generated from an RSM and then scatter the light from each cell in the volume to their neighbors. After several iterations, the volume contains the diffuse indirect light distribution of the scene covered by it. I implemented LPV using Tobias Franke&rsquo;s source code and the <a href="http://www.crytek.com/download/Light_Propagation_Volumes.pdf">paper</a> by Kaplanyan and Dachsbacher.We get a real time indirect contribution and its not that much performance heavy.</p>
-
-<h2 id="results-2:c86278bf4caeee7dc73687eaa5462b5c">Results</h2>
-
-<p><img src="../../images/cornell3.png" alt="" /></p>
-
-<p><img src="../../images/lpv.png" alt="" /></p>
-
-<p><img src="../../images/lpv2.png" alt="" /></p>
-
-<p><img src="../../images/lpv3.jpg" alt="" /></p>
-
-<p><img src="../../images/lpv4.jpg" alt="" /></p>
-
-<h1 id="voxel-cone-tracing:c86278bf4caeee7dc73687eaa5462b5c">Voxel Cone Tracing</h1>
-
-<p>Voxel Cone Tracing works by injecting VPLs generated from RSMs into large volumetric structures which are then prefiltered (i.e. mip-mapped). Instead of casting many rays to integrate the cone contribution on a surface point, lower resolution mip-map levels of the volume are queried to gather the pre-integrated first bounce.I implemented LPV using Tobias Franke&rsquo;s source code and the
-<a href="https://research.nvidia.com/sites/default/files/publications/GIVoxels-pg2011-authors.pdf">paper</a> by Nvidia.</p>
-
-<h2 id="results-3:c86278bf4caeee7dc73687eaa5462b5c">Results</h2>
-
-<p><img src="../../images/svo1.jpg" alt="" /></p>
-
-<p><img src="../../images/svo2.png" alt="" /></p>
-
-<p><img src="../../images/svo3.png" alt="" /></p>
-
-<h1 id="chromium-embedded-framework:c86278bf4caeee7dc73687eaa5462b5c">Chromium Embedded Framework</h1>
-
-<p>The Chromium Embedded Framework (CEF) is a simple framework for embedding Chromium-based browsers in other applications.It is basically having a web browser functionality in a single but large library.Using CEF we can render web content into a off-screen texture then render to a full-screen quad with transparency enabled and premultiplied alpha blending.I initially thought to use CEF in the place of Flash/Scaleform but wonder about its performance.Its pretty good so far although I didn&rsquo;t do anything but sending frame data to the CEF side and displaying it. I dont know how it would work in a real game but I dont think it will be worse than Scaleform.</p>
-
-<p>I created a child project called <strong>Cef3D</strong>, which wraps common CEF functionality and provides handy functions for javascript bindings and rendering to multiple buffers.Here is an example of rendering 3 web browsers to their respective buffers,then rendering those buffers as diffure textures.</p>
-
-<p><img src="../../images/cef1.png" alt="" /></p>
-
-<p>Cef3D will create a secondary executable so we will get the less performance impact. Only performance hit is uploading the off-screen buffer to the gpu.CEF only sends the dirty rectangles,i.e. the rectangles that needs rendering in the texture each time a part of the web browser is changed, we will only re-render that part.</p>
-
-<p><img src="../../images/cef2.png" alt="" /></p>
-
-<p><img src="../../images/cef3.jpg" alt="" /></p>
-
-<p>I designed the web page with <strong>React</strong> and <strong>MDL</strong> using NodeJs. Only special thing to do is enable transparent rendering on the CEF side and make sure HTML body is transparent.After that we have to set the blending mode to allow the OM to premultiply our alpha value.</p>
 
         </div>
 

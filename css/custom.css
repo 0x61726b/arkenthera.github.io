@@ -108,13 +108,6 @@ header  h1, .site-title {
   margin: .3em .4em .1em 0em;
   color: #e1e2e3;
 }
-header  h1, .site-title-yume {
-  font-family: 'Yanone Kaffeesatz', sans-serif;
-  font-weight: 700;
-  font-size: 2.5em;
-  margin: .3em .4em .1em 0em;
-  color: black;
-}
 header h2, .site-title-second {
   font-family: 'Yanone Kaffeesatz', sans-serif;
   font-weight: 300;

@@ -22,24 +22,10 @@
       
     
       
-    
-      
-        <item>
-          <title>Light Propagation Volumes</title>
-          <link>http://arkenthera.github.io/post/Light-Propagation-Volumes/</link>
-          <pubDate>Fri, 06 May 2016 22:08:01 EEST</pubDate>
-          <author></author>
-          <guid>http://arkenthera.github.io/post/Light-Propagation-Volumes/</guid>
-          <description>&lt;p&gt;Light propagation volumes is a technique to approximately achieve global illumination (GI) in Real-time.It uses lattices and spherical harmonics (SH) to represent the spatial and angular distribution of light in the scene&lt;/p&gt;
-</description>
-        </item>
-      
-    
-      
         <item>
           <title>Post Processing Effects</title>
           <link>http://arkenthera.github.io/post/Post-Processing-Effects/</link>
-          <pubDate>Sun, 01 May 2016 22:10:38 EEST</pubDate>
+          <pubDate>Sat, 07 May 2016 19:46:59 EEST</pubDate>
           <author></author>
           <guid>http://arkenthera.github.io/post/Post-Processing-Effects/</guid>
           <description>&lt;p&gt;Yume Engine has rich post processing effects such as Depth of Field,SSAO,Bloom,Auto Exposure and Godrays.It is really easy to implement/try new post process effects with the render call driven renderer.&lt;/p&gt;
@@ -51,7 +37,7 @@
         <item>
           <title>Horizon Based Ambient Occlusion</title>
           <link>http://arkenthera.github.io/post/Horizon-Based-Ambient-Occlusion/</link>
-          <pubDate>Mon, 25 Apr 2016 22:07:49 EEST</pubDate>
+          <pubDate>Sat, 07 May 2016 19:37:53 EEST</pubDate>
           <author></author>
           <guid>http://arkenthera.github.io/post/Horizon-Based-Ambient-Occlusion/</guid>
           <description>&lt;p&gt;Adapting from the sample in NVidia SDK’s DirectX 9 HBAO implementation, Yume Engine supports HBAO. Ambient Occlusion is not a simple concept to explain but in easiest words&amp;hellip;&lt;/p&gt;
@@ -61,13 +47,12 @@
     
       
         <item>
-          <title>Deferred Lights</title>
-          <link>http://arkenthera.github.io/post/Deferred-Lights/</link>
-          <pubDate>Sat, 23 Apr 2016 22:07:37 EEST</pubDate>
+          <title>Scaleable Ambient Obscurance</title>
+          <link>http://arkenthera.github.io/post/Scaleable-Ambient-Obscurance/</link>
+          <pubDate>Sat, 07 May 2016 19:37:23 EEST</pubDate>
           <author></author>
-          <guid>http://arkenthera.github.io/post/Deferred-Lights/</guid>
-          <description>&lt;p&gt;Since Yume is fully deferred,there has to be a way to implement lights.In a deferred pipeline,we must create a pass for each light,be it directional, point or spot light.
-For each point light,we draw a tesellated sphere,move it to lights&lt;/p&gt;
+          <guid>http://arkenthera.github.io/post/Scaleable-Ambient-Obscurance/</guid>
+          <description>&lt;p&gt;Scaleable Ambient Obscurance is really easy to implement and very light on the performance side.In the implementation&amp;hellip;&lt;/p&gt;
 </description>
         </item>
       
@@ -76,7 +61,7 @@ For each point light,we draw a tesellated sphere,move it to lights&lt;/p&gt;
         <item>
           <title>God Rays</title>
           <link>http://arkenthera.github.io/post/God-Rays/</link>
-          <pubDate>Fri, 15 Apr 2016 22:10:21 EEST</pubDate>
+          <pubDate>Sat, 07 May 2016 19:35:15 EEST</pubDate>
           <author></author>
           <guid>http://arkenthera.github.io/post/God-Rays/</guid>
           <description>&lt;p&gt;There is a way to achieve light shafts/god rays/light beams without too much of a work.As described in GPU GEMS god rays can be achieved with a simple trick.It wont be very accurate but we’ll get results
@@ -87,12 +72,27 @@ The “shaft” effect comes from the second pass,blur passes and tonemapping is
     
       
         <item>
-          <title>Scaleable Ambient Obscurance</title>
-          <link>http://arkenthera.github.io/post/Scaleable-Ambient-Obscurance/</link>
-          <pubDate>Fri, 15 Apr 2016 22:08:12 EEST</pubDate>
+          <title>Deferred Lights</title>
+          <link>http://arkenthera.github.io/post/Deferred-Lights/</link>
+          <pubDate>Sat, 07 May 2016 19:27:14 EEST</pubDate>
           <author></author>
-          <guid>http://arkenthera.github.io/post/Scaleable-Ambient-Obscurance/</guid>
-          <description>&lt;p&gt;Scaleable Ambient Obscurance is really easy to implement and very light on the performance side.In the implementation&amp;hellip;&lt;/p&gt;
+          <guid>http://arkenthera.github.io/post/Deferred-Lights/</guid>
+          <description>&lt;p&gt;Since Yume is fully deferred,there has to be a way to implement lights.In a deferred pipeline,we must create a pass for each light,be it directional, point or spot light.
+For each point light,we draw a tesellated sphere,move it to lights&lt;/p&gt;
+</description>
+        </item>
+      
+    
+      
+    
+      
+        <item>
+          <title>Light Propagation Volumes</title>
+          <link>http://arkenthera.github.io/post/Light-Propagation-Volumes/</link>
+          <pubDate>Sat, 07 May 2016 01:44:24 EEST</pubDate>
+          <author></author>
+          <guid>http://arkenthera.github.io/post/Light-Propagation-Volumes/</guid>
+          <description>&lt;p&gt;Light propagation volumes is a technique to approximately achieve global illumination (GI) in Real-time.It uses lattices and spherical harmonics (SH) to represent the spatial and angular distribution of light in the scene&lt;/p&gt;
 </description>
         </item>
       

@@ -3,8 +3,28 @@
   
   <url>
     <loc>http://arkenthera.github.io/</loc>
-    <lastmod>2016-05-07T20:44:02+03:00</lastmod>
+    <lastmod>2016-05-07T22:08:12+03:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://arkenthera.github.io/post/Scaleable-Ambient-Obscurance/</loc>
+    <lastmod>2016-05-07T22:08:12+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://arkenthera.github.io/post/Light-Propagation-Volumes/</loc>
+    <lastmod>2016-05-07T22:08:01+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://arkenthera.github.io/post/Horizon-Based-Ambient-Occlusion/</loc>
+    <lastmod>2016-05-07T22:07:49+03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://arkenthera.github.io/post/Deferred-Lights/</loc>
+    <lastmod>2016-05-07T22:07:37+03:00</lastmod>
   </url>
   
   <url>

@@ -1,0 +1,152 @@
+<div class="single">
+  <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.15" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans|Marcellus+SC'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+    <link rel="stylesheet" href="http://arkenthera.github.io/css/styles.css">
+    <link rel="stylesheet" href="http://arkenthera.github.io/css/custom.css">
+    <script src="http://arkenthera.github.io/js/custom.js" charset="utf-8"></script>
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://arkenthera.github.io//index.xml">
+    <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700,300,400' rel='stylesheet' type='text/css'></head>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" media="screen" title="no title" charset="utf-8">
+
+
+    
+    <title>Light Propagation Volumes - arkenthera.com</title>
+    <meta property='og:title' content="Light Propagation Volumes - arkenthera.com">
+    <meta property="og:type" content="article">
+    
+
+    <meta property="og:url" content="http://arkenthera.github.io/post/Light-Propagation-Volumes/">
+    
+    <meta property="og:image" content="http://arkenthera.github.io/images/lpv.png">
+
+  </head>
+
+  <body>
+
+    <header class="site">
+      <span>
+      <h1><a href="http://arkenthera.github.io/">arkenthera.com</a></h1>
+      <span>
+        <h2>graphics programmer in training</h2>
+        <span id="header-icons">
+            <a href="http://twitter.com/arkenthera/"><i class="ion-social-twitter ioni"></i></a>
+            <a href="#ZgotmplZ"><i class="ion-social-github ioni"></i></a>
+            <a href="https://www.youtube.com/channel/UCPGrADP6f19Apbb068_23Nw"><i class="ion-social-youtube ioni"></i></a>
+            <a href="arkenthera@gmail.com"><i class="ion-android-mail ioni"></i></a>
+        </span>
+      </span>
+    </span>
+      <nav>
+        <a href="http://arkenthera.github.io/" id="link-home">Home</a>
+        <p>|</p>
+        <a href="http://arkenthera.github.io/project/yume" id="link-yume">Yume Engine</a>
+        <p>|</p>
+        <a href="#" id="link-resume">Resume</a>
+        <p>|</p>
+        <a href="#" id="link-about">About</a>
+      </nav>
+    </header>
+
+    <div class="container site">
+
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <article class="single" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+        <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="http://arkenthera.github.io/"/>
+        <meta itemprop="dateModified" content="2016-05-07T22:08:01&#43;03:00">
+        <meta itemprop="headline" content="Light Propagation Volumes">
+        <meta itemprop="description" content="Light propagation volumes is a technique to approximately achieve global illumination (GI) in Real-time.It uses lattices and spherical harmonics (SH) to represent the spatial and angular distribution of light in the scene">
+        <meta itemprop="url" content="http://arkenthera.github.io/post/Light-Propagation-Volumes/">
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+          <meta itemprop="url" content="http://arkenthera.github.io/images/lpv.png" />
+          <meta itemprop="width" content="800">
+          <meta itemprop="height" content="800">
+        </div>
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+          <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+            <meta itemprop="url" content="http://arkenthera.github.io/images/logo.jpg">
+            <meta itemprop="width" content="100">
+            <meta itemprop="height" content="100">
+          </div>
+          <meta itemprop="name" content="arkenthera.com">
+        </div>
+        <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <meta itemprop="name" content="">
+        </div>
+
+        <div class="image" style="background-image: url(http://arkenthera.github.io/images/lpv.png);"></div>
+
+        <header class="article-header">
+          <time itemprop="datePublished" pubdate="pubdate" datetime="2016-05-07T22:08:01&#43;03:00">Sat, May 7, 2016</time>
+          <h1 class="article-title">Light Propagation Volumes</h1>
+        </header>
+
+        <div class="article-body" itemprop="articleBody">
+          <p>Light propagation volumes is a technique to approximately achieve global illumination (GI) in Real-time.It uses lattices and spherical harmonics (SH) to represent the spatial and angular distribution of light in the scene</p>
+
+        </div>
+
+
+        <aside>
+          
+
+          <div class="section share">
+            <a href="http://www.facebook.com/sharer.php?src=bm&u=http%3a%2f%2farkenthera.github.io%2fpost%2fLight-Propagation-Volumes%2f&t=Light%20Propagation%20Volumes" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-facebook"></i></a>
+            <a href="http://twitter.com/intent/tweet?url=http%3a%2f%2farkenthera.github.io%2fpost%2fLight-Propagation-Volumes%2f&text=Light%20Propagation%20Volumes&tw_p=tweetbutton" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-twitter"></i></a>
+            <a href="https://plus.google.com/share?url=http%3a%2f%2farkenthera.github.io%2fpost%2fLight-Propagation-Volumes%2f" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-google-plus"></i></a>
+            <a href="http://getpocket.com/edit?url=http%3a%2f%2farkenthera.github.io%2fpost%2fLight-Propagation-Volumes%2f&title=Light%20Propagation%20Volumes" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-get-pocket"></i></a>
+          </div>
+
+          
+          
+          
+        </aside>
+
+      </article>
+    </div>
+
+    
+  </div>
+
+      </div>
+
+    <footer class="site">
+      <span>
+        <h1 class="site-title">Arkenthera.com</h1>
+        <h2 class="site-title-second">graphics programmer in training</h2>
+        <h3>Copyright 2016 - Powered by <a href="http://gohugo.io">gohugo.io</a></h3>
+      </span>
+      <ul>
+        <a href="" id="footer-1"><li>Twitter</li></a>
+        <a href="" id="footer-2"><li>Github</li></a>
+        <a href="" id="footer-3"><li>Youtube</li></a>
+        <a href="" id="footer-4"><li>E-mail</li></a>
+        <a>
+        </a>
+      </ul>
+    </footer>
+
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+  </body>
+</html>
+
+</div>

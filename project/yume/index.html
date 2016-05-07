@@ -1,0 +1,197 @@
+<div class="single">
+  <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.15" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans|Marcellus+SC'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_dark.min.css">
+    <link rel="stylesheet" href="http://arkenthera.github.io/css/styles.css">
+    <link rel="stylesheet" href="http://arkenthera.github.io/css/custom.css">
+    <script src="http://arkenthera.github.io/js/custom.js" charset="utf-8"></script>
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://arkenthera.github.io//index.xml">
+    <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700,300,400' rel='stylesheet' type='text/css'></head>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" media="screen" title="no title" charset="utf-8">
+
+
+    
+    <title>Brief introduction to Yume Engine and Screenshots - arkenthera.com</title>
+    <meta property='og:title' content="Brief introduction to Yume Engine and Screenshots - arkenthera.com">
+    <meta property="og:type" content="article">
+    
+
+    <meta property="og:url" content="http://arkenthera.github.io/project/yume/">
+    
+    <meta property="og:image" content="http://arkenthera.github.io/images/1.jpg">
+
+  </head>
+
+  <body>
+
+    <header class="site">
+      <span>
+      <h1><a href="http://arkenthera.github.io/">arkenthera.com</a></h1>
+      <span>
+        <h2>graphics programmer in training</h2>
+        <span id="header-icons">
+            <a href="http://twitter.com/arkenthera/"><i class="ion-social-twitter ioni"></i></a>
+            <a href="#ZgotmplZ"><i class="ion-social-github ioni"></i></a>
+            <a href="https://www.youtube.com/channel/UCPGrADP6f19Apbb068_23Nw"><i class="ion-social-youtube ioni"></i></a>
+            <a href="arkenthera@gmail.com"><i class="ion-android-mail ioni"></i></a>
+        </span>
+      </span>
+    </span>
+      <nav>
+        <a href="http://arkenthera.github.io/" id="link-home">Home</a>
+        <p>|</p>
+        <a href="http://arkenthera.github.io/project/yume" id="link-yume">Yume Engine</a>
+        <p>|</p>
+        <a href="#" id="link-resume">Resume</a>
+        <p>|</p>
+        <a href="#" id="link-about">About</a>
+      </nav>
+    </header>
+
+    <div class="container site">
+
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <article class="single" itemscope="itemscope" itemtype="http://schema.org/Article">
+
+        <meta itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" content="http://arkenthera.github.io/"/>
+        <meta itemprop="dateModified" content="2016-05-07T16:12:31&#43;03:00">
+        <meta itemprop="headline" content="Brief introduction to Yume Engine and Screenshots">
+        <meta itemprop="description" content="Yume Engine is my playground for graphics experiments and developing my skills in graphics programming. It took me a lot to finally come up with an idea which allows me to build a high level renderer that is simple but effective. I wanted to have 2 things at first.One being able to create fast prototypes while other is being simple to read/comprehend. Yume Engine is not a real game engine.I dont have to think about masses using this to create games so I used hacks here and there to get things going quickly,when it wouldnt be plaisuble in a real engine situation.">
+        <meta itemprop="url" content="http://arkenthera.github.io/project/yume/">
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+          <meta itemprop="url" content="http://arkenthera.github.io/images/1.jpg" />
+          <meta itemprop="width" content="1600">
+          <meta itemprop="height" content="900">
+        </div>
+
+        <div class="image" style="background-image: url(http://arkenthera.github.io/images/1.jpg);"></div>
+
+        <header class="article-header">
+          <h1 class="article-title">Brief introduction to Yume Engine and Screenshots</h1>
+        </header>
+        <div class="article-body article-body-yume" itemprop="articleBody">
+          
+
+<p><strong>Yume Engine</strong> is my playground for graphics experiments and developing my skills in graphics programming.
+It took me a lot to finally come up with an idea which allows me to build a high level renderer that is simple but effective.<img src="../../images/2.png#img-yume1" alt="alt" />
+I wanted to have 2 things at first.One being able to create fast prototypes while other is being simple to read/comprehend.
+Yume Engine is not a real game engine.I dont have to think about masses using this to create games so
+ I used hacks here and there to get things going quickly,when it wouldnt be plaisuble in a real engine situation.
+ In this article I&rsquo;m going to talk about how Yume engine handles state changes,how it executes draw calls and hopefully
+ provide source code at the end of the post so you,reader, maybe get a hold of how this engine works.</p>
+
+<p>For a long time I didnt know how I can create a high level renderer,or to put it better,
+I didnt know where to start.After several hundreds of hours inspecting,studying other engines
+ I now have how I could go for building a renderer that is not so complicated and does what I want.
+ Along the way I have learnt a lot,be it my coding proficiency or my graphics knowledge.
+ To people out there who dont know where to start,it is a very good idea to examine open source engines like
+ Ogre3D,Horde3D,Urho3D and many more! You can find many similarities in Yume by looking at those engines. <br />
+ Although Yume doesn&rsquo;t have many features, there are several which I&rsquo;m really happy to have. Such as Global Illumination!</p>
+
+<h1 id="deferred-rendering:c86278bf4caeee7dc73687eaa5462b5c">Deferred Rendering</h1>
+
+<p>Yume Engine uses full deferred pipeline.For most of the samples,the GBuffer has 4 render targets, <strong>Diffuse Albedo</strong>,<strong>Specular Albedo</strong>,<strong>Linear Depth</strong> and <strong>Normals</strong>.</p>
+
+<p><img src="../../images/gbuffer.png" alt="" /></p>
+
+<p>We then use these render targets in the next stages of rendering,such as Deferred Lights.For the moment, I didnt use hardware depth buffer because I also store the linear depth as</p>
+
+<pre><code>float2 linearDepth = float2(z, z*z);
+</code></pre>
+
+<p>to use in <em>Variance Shadow Mapping</em>.</p>
+
+<p>There is also <strong>Reflective Shadow Map</strong> support, which is basically rendering to the GBuffer but from the lights perspective.</p>
+
+<h1 id="deferred-lights:c86278bf4caeee7dc73687eaa5462b5c">Deferred Lights</h1>
+
+<p>Since Yume is fully deferred,there has to be a way to implement lights.In a deferred pipeline,we must create a pass for each light,be it directional,
+point or spot light.</p>
+
+<p>For each point light,we draw a tesellated sphere,move it to lights world position and scale it to point lights range.
+We then enable stencil test using the stencil buffer from the GBuffer pass. Comparing against stencil buffer yields the pixels that will be in the point lights range of influnce.
+Then we shade the pixels by <em>reconstructing the depth</em> in the pixel shader using the Linear Depth from the GBuffer pass.</p>
+
+<h2 id="results:c86278bf4caeee7dc73687eaa5462b5c">Results</h2>
+
+<p><img src="../../images/plight1.jpg" alt="" /></p>
+
+<p><img src="../../images/plight2.jpg" alt="" /></p>
+
+<p><img src="../../images/plight3.jpg" alt="" /></p>
+
+<h1 id="horizon-based-ambient-occlusion:c86278bf4caeee7dc73687eaa5462b5c">Horizon Based Ambient Occlusion</h1>
+
+<p>Adapting from the sample in NVidia SDK&rsquo;s DirectX 9 HBAO implementation, Yume Engine supports HBAO. Ambient Occlusion is not a simple concept to explain but in easiest words,for pixels in depth buffer,we assume a hemisphere,then shoot rays at random directions to see if they occlude something.If they do we add a occlusion factor.Note that this is the very basic idea of Ambient Occlusion and there are several implementations such as Scaleable Ambient Obscurance,ABAO,SSAO,SSDO,AAO.. For more information see <a href="http://http.developer.nvidia.com/GPUGems3/gpugems3_ch12.html">GPU GEMS 3</a>
+Here is a gif of the effect when HBAO is off,max,med and normal qualities.</p>
+
+<p><img src="http://i.imgur.com/w3S2uNA.gif" alt="" /></p>
+
+<p>Here is a side by side comparison</p>
+
+<p><img src="../../images/hbaosidebyside.png" alt="alt" /></p>
+
+        </div>
+
+        <aside>
+          
+
+          <div class="section share">
+            <a href="http://www.facebook.com/sharer.php?src=bm&u=http%3a%2f%2farkenthera.github.io%2fproject%2fyume%2f&t=Brief%20introduction%20to%20Yume%20Engine%20and%20Screenshots" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-facebook"></i></a>
+            <a href="http://twitter.com/intent/tweet?url=http%3a%2f%2farkenthera.github.io%2fproject%2fyume%2f&text=Brief%20introduction%20to%20Yume%20Engine%20and%20Screenshots&tw_p=tweetbutton" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-twitter"></i></a>
+            <a href="https://plus.google.com/share?url=http%3a%2f%2farkenthera.github.io%2fproject%2fyume%2f" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-google-plus"></i></a>
+            <a href="http://getpocket.com/edit?url=http%3a%2f%2farkenthera.github.io%2fproject%2fyume%2f&title=Brief%20introduction%20to%20Yume%20Engine%20and%20Screenshots" onclick="window.open(this.href, 'PCwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"><i class="fa fa-get-pocket"></i></a>
+          </div>
+
+          
+          
+          
+        </aside>
+
+      </article>
+    </div>
+
+    
+  </div>
+
+      </div>
+
+    <footer class="site">
+      <span>
+        <h1 class="site-title">Arkenthera.com</h1>
+        <h2 class="site-title-second">graphics programmer in training</h2>
+        <h3>Copyright 2016 - Powered by <a href="http://gohugo.io">gohugo.io</a></h3>
+      </span>
+      <ul>
+        <a href="" id="footer-1"><li>Twitter</li></a>
+        <a href="" id="footer-2"><li>Github</li></a>
+        <a href="" id="footer-3"><li>Youtube</li></a>
+        <a href="" id="footer-4"><li>E-mail</li></a>
+        <a>
+        </a>
+      </ul>
+    </footer>
+
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+
+  </body>
+</html>
+
+</div>

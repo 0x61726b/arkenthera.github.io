@@ -1,8 +1,0 @@
-baseurl = "http://arkenthera.github.io/"
-languageCode = "en-us"
-title = "arkenthera.com"
-[params.links]
-  twitter = "http://twitter.com/arkenthera/"
-  github = " https://github.com/arkenthera"
-  youtube = "https://www.youtube.com/channel/UCPGrADP6f19Apbb068_23Nw"
-  email = "arkenthera@gmail.com"

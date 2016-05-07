@@ -101,6 +101,13 @@ header a:hover {
   color: white;
   text-decoration: none;
 }
+header  h1, .site-title-yume {
+   font-family: 'Yanone Kaffeesatz', sans-serif;
+   font-weight: 700;
+  font-size: 2.5em;
+    margin: .3em .4em .1em 0em;
+   color: black;
+ }
 header  h1, .site-title {
   font-family: 'Yanone Kaffeesatz', sans-serif;
   font-weight: 700;

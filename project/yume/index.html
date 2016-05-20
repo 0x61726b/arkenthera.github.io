@@ -186,6 +186,40 @@ Here is a gif of the effect when HBAO is off,max,med and normal qualities.</p>
 
 <p>I designed the web page with <strong>React</strong> and <strong>MDL</strong> using NodeJs. Only special thing to do is enable transparent rendering on the CEF side and make sure HTML body is transparent.After that we have to set the blending mode to allow the OM to premultiply our alpha value.</p>
 
+<h1 id="post-processing:c86278bf4caeee7dc73687eaa5462b5c">Post Processing</h1>
+
+<p>Yume makes use of Ping-ponging to select what render targets will be written to or read from in a post-process chain.So it is possible to bind a lot of post prossing effect sequencially.</p>
+
+<h2 id="bloom-tone-mapping-and-eye-adaptation:c86278bf4caeee7dc73687eaa5462b5c">Bloom , Tone Mapping and Eye Adaptation</h2>
+
+<p><img src="../../images/bloom1.jpg" alt="" /></p>
+
+<p><img src="../../images/bloom2.jpg" alt="" /></p>
+
+<h2 id="depth-of-field:c86278bf4caeee7dc73687eaa5462b5c">Depth of Field</h2>
+
+<p><img src="../../images/dofnew.jpg" alt="" /></p>
+
+<p><img src="../../images/dof3.jpg" alt="" /></p>
+
+<h2 id="god-rays:c86278bf4caeee7dc73687eaa5462b5c">God rays</h2>
+
+<p><img src="../../images/godrays1.jpg" alt="" /></p>
+
+<p><img src="../../images/godrays2.png" alt="" /></p>
+
+<p><img src="../../images/godrays3.jpg" alt="" /></p>
+
+<h2 id="fxaa:c86278bf4caeee7dc73687eaa5462b5c">FXAA</h2>
+
+<p>Off</p>
+
+<p><img src="../../images/fxaaoff.png" alt="" /></p>
+
+<p>On</p>
+
+<p><img src="../../images/fxaaon.png" alt="" /></p>
+
         </div>
 
         <aside>
